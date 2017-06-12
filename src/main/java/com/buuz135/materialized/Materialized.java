@@ -21,6 +21,7 @@ public class Materialized {
             return new ItemStack(Blocks.STONE);
         }
     };
+
     @SidedProxy(clientSide = Reference.PROXY_CLIENT, serverSide = Reference.PROXY_COMMON)
     private static CommonProxy proxy;
 
