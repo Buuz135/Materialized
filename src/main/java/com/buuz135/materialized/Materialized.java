@@ -10,10 +10,14 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 @Mod(modid = Reference.MODID, name = Reference.MODID, version = Reference.VERSION)
 public class Materialized {
+
+    public static Logger LOGGER = LogManager.getLogger(Reference.MODID);
 
     public static CreativeTabs creativeTab = new CreativeTabs(Reference.MODID) {
         @Override

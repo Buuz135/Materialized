@@ -1,0 +1,100 @@
+{
+  "name": "copper",
+  "color": "a35309",
+  "ore": {
+    "harvestLevel": 1,
+    "worldgen": {
+    },
+    "drop": {
+      "item": "this:ore",
+      "meta": 0,
+      "amount": 1
+    },
+    "oredict": [
+      "ore:this"
+    ]
+  },
+  "denseore": {
+    "harvestLevel": 1,
+    "worldgen": {
+    },
+    "drop": {
+      "item": "this:ore",
+      "meta": 0,
+      "amount": 1
+    },
+    "oredict": [
+      "oreDense:this"
+    ]
+  },
+  "lightore": {
+    "harvestLevel": 1,
+    "worldgen": {
+    },
+    "drop": {
+      "item": "this:ore",
+      "meta": 0,
+      "amount": 1
+    },
+    "oredict": [
+      "oreLight:this"
+    ]
+  },
+  "gravelore": {
+    "harvestLevel": 1,
+    "worldgen": {
+    },
+    "drop": {
+      "item": "this:ore",
+      "meta": 0,
+      "amount": 1
+    },
+    "oredict": [
+      "oreLight:this"
+    ]
+  },
+  "sandore": {
+    "harvestLevel": 1,
+    "worldgen": {
+    },
+    "drop": {
+      "item": "this:ore",
+      "meta": 0,
+      "amount": 1
+    },
+    "oredict": [
+      "oreLight:this"
+    ]
+  },
+  "block": true,
+  "ingot": {
+    "oredict": [
+      "ingot:this"
+    ]
+  },
+  "nugget": {
+    "oredict": [
+      "nugget:this"
+    ]
+  },
+  "tinydust": {
+    "oredict": [
+      "tinyDust:this"
+    ]
+  },
+  "plate": {
+    "oredict": [
+      "plate:this"
+    ]
+  },
+  "gear": {
+    "oredict": [
+      "gear:this"
+    ]
+  },
+  "gem": {
+    "oredict": [
+      "gem:this"
+    ]
+  }
+}
