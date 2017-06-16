@@ -3,18 +3,31 @@ package com.buuz135.materialized.api;
 import com.buuz135.materialized.api.material.BlockMaterial;
 import com.buuz135.materialized.api.material.CreatedMaterial;
 import com.buuz135.materialized.api.material.info.MaterialInfo;
+import com.buuz135.materialized.utils.Reference;
+import net.minecraft.block.material.Material;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MaterialRegistry {
 
     public static final MaterialRegistry INSTANCE = new MaterialRegistry();
+    private HashMap<String, BlockMaterial> blockMaterials;
+
+
 
     private List<CreatedMaterial> materials;
 
     public MaterialRegistry() {
         materials = new ArrayList<>();
+        blockMaterials = new HashMap<>();
+        this.addBlockMaterial(new BlockMaterial("ore", Material.ROCK, "pickaxe", new ResourceLocation(Reference.MODID, "blocks/metalore"), 0));
+        this.addBlockMaterial(new BlockMaterial("denseore", Material.ROCK, "pickaxe", new ResourceLocation(Reference.MODID, "blocks/metaldenseore"), 0));
+        this.addBlockMaterial(new BlockMaterial("lightore", Material.ROCK, "pickaxe", new ResourceLocation(Reference.MODID, "blocks/metallightore"), 0));
+        this.addBlockMaterial(new BlockMaterial("block", Material.IRON, "pickaxe", new ResourceLocation(Reference.MODID, "blocks/metaldenseore"), 0));
+
     }
 
     public void getCreatedMaterial(String name) {
@@ -25,17 +38,9 @@ public class MaterialRegistry {
 //        }
     }
 
-    public CreatedMaterial addMaterialInfo(MaterialInfo materialInfo) {
+    public CreatedMaterial addMaterial(MaterialInfo materialInfo) {
         CreatedMaterial createdMaterial = getMaterialOrCreate(materialInfo.getName(), (int) Long.parseLong(materialInfo.getColor(), 16));
-        if (materialInfo.getOre() != null) createdMaterial.createBlock(BlockMaterial.ORE, materialInfo.getOre());
-        if (materialInfo.getDenseore() != null)
-            createdMaterial.createBlock(BlockMaterial.DENSEORE, materialInfo.getDenseore());
-        if (materialInfo.getLightore() != null)
-            createdMaterial.createBlock(BlockMaterial.LIGHTORE, materialInfo.getLightore());
-        if (materialInfo.getGravelore() != null)
-            createdMaterial.createBlock(BlockMaterial.GRAVELORE, materialInfo.getGravelore());
-        if (materialInfo.getSandore() != null)
-            createdMaterial.createBlock(BlockMaterial.SANDORE, materialInfo.getSandore());
+        materialInfo.getBlockParts().forEach(blockPart -> createdMaterial.createBlock(getBlockMaterial(blockPart.getType()), blockPart));
         materials.add(createdMaterial);
         return createdMaterial;
     }
@@ -54,5 +59,18 @@ public class MaterialRegistry {
 
     public List<CreatedMaterial> getMaterials() {
         return materials;
+    }
+
+    public void addBlockMaterial(BlockMaterial blockMaterial) {
+        if (!blockMaterials.containsKey(blockMaterial.getName())) {
+            blockMaterials.put(blockMaterial.getName(), blockMaterial);
+        }
+    }
+
+    public BlockMaterial getBlockMaterial(String name) {
+        if (blockMaterials.containsKey(name)) {
+            return blockMaterials.get(name);
+        }
+        return null;
     }
 }

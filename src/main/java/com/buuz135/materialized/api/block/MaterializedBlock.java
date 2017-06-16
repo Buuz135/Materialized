@@ -2,7 +2,7 @@ package com.buuz135.materialized.api.block;
 
 import com.buuz135.materialized.Materialized;
 import com.buuz135.materialized.api.material.BlockMaterial;
-import com.buuz135.materialized.api.material.info.OrePartInfo;
+import com.buuz135.materialized.api.material.info.BlockPart;
 import com.buuz135.materialized.proxy.client.RenderHelper;
 import com.buuz135.materialized.utils.Reference;
 import lombok.Setter;
@@ -27,7 +27,7 @@ public class MaterializedBlock extends Block {
     private BlockMaterial blockMaterial;
     private String name;
     @Setter
-    private OrePartInfo.DropInfo dropInfo;
+    private BlockPart.DropInfo dropInfo;
 
     public MaterializedBlock(BlockMaterial blockMaterial, String name, Material mat, int harvest) {
         super(mat);

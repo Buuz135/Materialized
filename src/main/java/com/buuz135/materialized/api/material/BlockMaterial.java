@@ -1,30 +1,24 @@
 package com.buuz135.materialized.api.material;
 
-import lombok.Getter;
+import lombok.Data;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.ResourceLocation;
 
-public enum BlockMaterial implements IStringSerializable {
-    ORE(Material.ROCK, "pickaxe"),
-    DENSEORE(Material.ROCK, "pickaxe"),
-    LIGHTORE(Material.ROCK, "pickaxe"),
-    SANDORE(Material.SAND, "shovel"),
-    GRAVELORE(Material.SAND, "shovel"),
-    BLOCK(Material.IRON, "pickaxe");
+public @Data
+class BlockMaterial implements IStringSerializable {
 
-    @Getter
+    private String name;
     private Material material;
-    @Getter
     private String tool;
+    private ResourceLocation resourceLocation;
+    private int layer;
 
-    private BlockMaterial(Material material, String tool) {
+    public BlockMaterial(String name, Material material, String tool, ResourceLocation resourceLocation, int layer) {
+        this.name = name;
         this.material = material;
         this.tool = tool;
+        this.resourceLocation = resourceLocation;
+        this.layer = layer;
     }
-
-    @Override
-    public String getName() {
-        return this.name().toLowerCase();
-    }
-
 }

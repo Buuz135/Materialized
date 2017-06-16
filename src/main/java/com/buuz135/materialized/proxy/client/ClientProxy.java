@@ -2,7 +2,6 @@ package com.buuz135.materialized.proxy.client;
 
 import com.buuz135.materialized.api.MaterialRegistry;
 import com.buuz135.materialized.api.block.ColoredMaterializedBlock;
-import com.buuz135.materialized.api.material.CreatedMaterial;
 import com.buuz135.materialized.proxy.CommonProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
@@ -19,13 +18,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init(FMLInitializationEvent event) {
         super.init(event);
-        for (CreatedMaterial material : MaterialRegistry.INSTANCE.getMaterials()) {
-            registerColor(material.getOre(), 0);
-            registerColor(material.getDenseore(), 0);
-            registerColor(material.getLightore(), 0);
-            registerColor(material.getSandore(), 0);
-            registerColor(material.getGravelore(), 0);
-        }
+        MaterialRegistry.INSTANCE.getMaterials().forEach(createdMaterial -> createdMaterial.getMaterializedBlockHashMap().forEach((blockPart, block) -> registerColor(block, blockPart.getLayer())));
     }
 
     @Override
