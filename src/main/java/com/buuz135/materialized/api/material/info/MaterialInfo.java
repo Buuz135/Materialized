@@ -12,6 +12,7 @@ class MaterialInfo {
     private String name;
     private String color;
     private List<BlockPart> blockParts;
+    private List<ItemPart> itemParts;
     private boolean block;
 
 }

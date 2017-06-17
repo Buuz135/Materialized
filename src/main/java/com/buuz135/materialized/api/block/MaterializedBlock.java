@@ -27,7 +27,7 @@ public class MaterializedBlock extends Block {
     private BlockMaterial blockMaterial;
     private String name;
     @Setter
-    private BlockPart.DropInfo dropInfo;
+    private BlockPart.DropInfo dropInfo; //Todo add better dropstuff XP Fortune
 
     public MaterializedBlock(BlockMaterial blockMaterial, String name, Material mat, int harvest) {
         super(mat);

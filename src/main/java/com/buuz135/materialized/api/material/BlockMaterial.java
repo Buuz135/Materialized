@@ -2,11 +2,10 @@ package com.buuz135.materialized.api.material;
 
 import lombok.Data;
 import net.minecraft.block.material.Material;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 
 public @Data
-class BlockMaterial implements IStringSerializable {
+class BlockMaterial {
 
     private String name;
     private Material material;

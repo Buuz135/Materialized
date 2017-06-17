@@ -1,12 +1,20 @@
 package com.buuz135.materialized.api.material;
 
-import net.minecraft.util.IStringSerializable;
+import lombok.Data;
+import net.minecraft.util.ResourceLocation;
 
-public enum ItemMaterial implements IStringSerializable {
-    INGOT, NUGGET, DUST, TINYDUST, PLATE, GEAR, GEM;
 
-    @Override
-    public String getName() {
-        return this.name().toLowerCase();
+public @Data
+class ItemMaterial {
+//    INGOT, NUGGET, DUST, TINYDUST, PLATE, GEAR, GEM;
+
+    private String name;
+    private ResourceLocation resourceLocation;
+    private int layer;
+
+    public ItemMaterial(String name, ResourceLocation resourceLocation, int layer) {
+        this.name = name;
+        this.resourceLocation = resourceLocation;
+        this.layer = layer;
     }
 }

@@ -1,0 +1,16 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "materialized:item",
+    "transform": "forge:default-item",
+    "textures": {
+      "layer0": "materialized:items/metal_gear"
+    }
+  },
+  "variants": {
+    "inventory": [
+      {
+      }
+    ]
+  }
+}

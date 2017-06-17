@@ -2,6 +2,7 @@ package com.buuz135.materialized.proxy;
 
 import com.buuz135.materialized.api.MaterialRegistry;
 import com.buuz135.materialized.api.material.info.BlockPart;
+import com.buuz135.materialized.api.material.info.ItemPart;
 import com.buuz135.materialized.api.material.info.MaterialInfo;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -17,7 +18,16 @@ public class CommonProxy {
                 .blockParts(Arrays.asList(
                         new BlockPart("ore", 1, new BlockPart.DropInfo()),
                         new BlockPart("denseore", 1, new BlockPart.DropInfo()),
-                        new BlockPart("lightore", 1, new BlockPart.DropInfo()))).build());
+                        new BlockPart("lightore", 1, new BlockPart.DropInfo()),
+                        new BlockPart("block", 1, new BlockPart.DropInfo())))
+                .itemParts(Arrays.asList(
+                        new ItemPart("ingot"),
+                        new ItemPart("nugget"),
+                        new ItemPart("dust"),
+                        new ItemPart("tinydust"),
+                        new ItemPart("plate"),
+                        new ItemPart("gear")))
+                .build());
     }
 
     public void init(FMLInitializationEvent event) {

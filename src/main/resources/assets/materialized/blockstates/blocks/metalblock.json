@@ -1,0 +1,19 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "materialized:coloredblock",
+    "textures": {
+      "ore": "materialized:blocks/metal_block"
+    }
+  },
+  "variants": {
+    "normal": [
+      {
+      }
+    ],
+    "inventory": [
+      {
+      }
+    ]
+  }
+}
