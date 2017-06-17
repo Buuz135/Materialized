@@ -1,7 +1,7 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "materialized:coloredblock",
+    "model": "materialized:simplecoloredblock",
     "textures": {
       "ore": "materialized:blocks/metal_block"
     }
