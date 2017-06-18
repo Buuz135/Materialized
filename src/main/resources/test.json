@@ -1,100 +1,68 @@
-{
-  "name": "copper",
-  "color": "a35309",
-  "ore": {
-    "harvestLevel": 1,
-    "worldgen": {
-    },
-    "drop": {
-      "item": "this:ore",
-      "meta": 0,
-      "amount": 1
-    },
-    "oredict": [
-      "ore:this"
-    ]
-  },
-  "denseore": {
-    "harvestLevel": 1,
-    "worldgen": {
-    },
-    "drop": {
-      "item": "this:ore",
-      "meta": 0,
-      "amount": 1
-    },
-    "oredict": [
-      "oreDense:this"
-    ]
-  },
-  "lightore": {
-    "harvestLevel": 1,
-    "worldgen": {
-    },
-    "drop": {
-      "item": "this:ore",
-      "meta": 0,
-      "amount": 1
-    },
-    "oredict": [
-      "oreLight:this"
-    ]
-  },
-  "gravelore": {
-    "harvestLevel": 1,
-    "worldgen": {
-    },
-    "drop": {
-      "item": "this:ore",
-      "meta": 0,
-      "amount": 1
-    },
-    "oredict": [
-      "oreLight:this"
-    ]
-  },
-  "sandore": {
-    "harvestLevel": 1,
-    "worldgen": {
-    },
-    "drop": {
-      "item": "this:ore",
-      "meta": 0,
-      "amount": 1
-    },
-    "oredict": [
-      "oreLight:this"
-    ]
-  },
-  "block": true,
-  "ingot": {
-    "oredict": [
-      "ingot:this"
-    ]
-  },
-  "nugget": {
-    "oredict": [
-      "nugget:this"
-    ]
-  },
-  "tinydust": {
-    "oredict": [
-      "tinyDust:this"
-    ]
-  },
-  "plate": {
-    "oredict": [
-      "plate:this"
-    ]
-  },
-  "gear": {
-    "oredict": [
-      "gear:this"
-    ]
-  },
-  "gem": {
-    "oredict": [
-      "gem:this"
+[
+  //A collection of material as JSON objects
+  {
+    "name": "copper",
+    //Name of the material
+    "color": "a35309",
+    //Color of the material
+    "blockParts": [
+      // A collection of Block Types displayed above
+      {
+        "type": "ore",
+        "harvestLevel": 2,
+        "hardness": 3,
+        "oredict": [
+          "ore:this"
+        ],
+        "drop": {
+          "item": "this:ore",
+          "meta": 0,
+          "amount": 1,
+          "fortuneModifier": 0,
+          "xpDrop": 0
+        }
+      },
+      {
+        "type": "denseore",
+        "harvestLevel": 2,
+        "hardness": 4,
+        "oredict": [
+          "denseOre:this"
+        ],
+        "drop": {
+          "item": "this:ore",
+          "meta": 0,
+          "amount": 3,
+          "fortuneModifier": 1,
+          "xpDrop": 0
+        }
+      },
+      {
+        "type": "lightore",
+        "harvestLevel": 2,
+        "hardness": 2,
+        "oredict": [
+          "lightOre:this"
+        ],
+        "drop": {
+          "item": "this:nugget",
+          "meta": 0,
+          "amount": 2,
+          "fortuneModifier": 2,
+          "xpDrop": 1
+        }
+      }
+    ],
+    "itemParts": [
+      {
+        "type": "ingot",
+        "oredict": [
+          "ingot:this"
+        ]
+      },
+      {
+        "type": "nugget"
+      }
     ]
   }
-}
+]

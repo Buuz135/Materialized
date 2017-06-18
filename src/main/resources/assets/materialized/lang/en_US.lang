@@ -10,3 +10,5 @@ type.nugget.name=Nugget
 type.dust.name=Dust
 type.tinydust.name=Tiny Dust
 type.block.name=Block
+
+itemGroup.matterialized=Materialized
