@@ -89,11 +89,10 @@ public class MaterializedBlock extends Block {
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         if (dropInfo.getItem() == null) return super.getItemDropped(state, rand, fortune);
-        Item item = Item.getByNameOrId(dropInfo.getItem().replaceAll("this", Reference.MODID) + name);
-        System.out.println(item);
-        if (item != null) {
-            return item;
-        }
+        Item item = Item.getByNameOrId(dropInfo.getItem());
+        if (item != null) return item;
+        item = Item.getByNameOrId(dropInfo.getItem().replaceAll("this", Reference.MODID) + name);
+        if (item != null) return item;
         return super.getItemDropped(state, rand, fortune);
     }
 
