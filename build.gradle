@@ -84,3 +84,52 @@ processResources {
         exclude 'mcmod.info'
     }
 }
+
+uploadArchives{
+    repositories{
+        mavenDeployer{
+            configuration = configurations.deployerJars
+            //repository(url: System.properties['URL']) {
+            repository(url: "${project.ext['url']}") {
+                authentication(userName: "${project.ext['httpuser']}", password: "${project.ext['httppass']}")
+            }
+            pom{
+                groupId = project.group
+                version = project.version
+                artifactId = project.archivesBaseName
+
+                pom.project {
+                    name = project.archivesBaseName
+                    packaging 'jar'
+                    description 'Materialized'
+                    url 'https://github.com/Buuz135/Materialized'
+                    scm {
+                        url 'https://github.com/Buuz135/Materialized'
+                        connection 'scm:git:git@github.com/Buuz135/Materialized'
+                        developerConnection 'scm:git:git@github.com/Buuz135/Materialized'
+                    }
+                    issueManagement {
+                        system 'github'
+                        url 'https://github.com/Buuz135/Materialized/issues'
+                    }
+                    licenses {
+                        license {
+                            name 'MIT License'
+                            url 'https://opensource.org/licenses/MIT'
+                            distribution 'repo'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id 'Buuz135'
+                            name 'Buuz135'
+                            roles {
+                                role 'developer'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
