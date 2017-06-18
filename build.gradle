@@ -86,6 +86,10 @@ processResources {
     }
 }
 
+configurations {
+    deployerJars
+}
+
 uploadArchives{
     repositories{
         mavenDeployer{
