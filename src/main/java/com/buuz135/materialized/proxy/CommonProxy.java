@@ -16,10 +16,10 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         MaterialRegistry.INSTANCE.addMaterial(MaterialInfo.builder().name("copper").color("a35309")
                 .blockParts(Arrays.asList(
-                        new BlockPart("ore", 1, new BlockPart.DropInfo()),
-                        new BlockPart("denseore", 1, new BlockPart.DropInfo()),
-                        new BlockPart("lightore", 1, new BlockPart.DropInfo()),
-                        new BlockPart("block", 1, new BlockPart.DropInfo())))
+                        new BlockPart("ore", 3, 3, new BlockPart.DropInfo(null, 0, 1, 0, 0)),
+                        new BlockPart("denseore", 3, 3, new BlockPart.DropInfo(null, 0, 1, 0, 0)),
+                        new BlockPart("lightore", 3, 3, new BlockPart.DropInfo("this:nugget", 0, 2, 2, 1)),
+                        new BlockPart("block", 3, 3, new BlockPart.DropInfo(null, 0, 1, 0, 0))))
                 .itemParts(Arrays.asList(
                         new ItemPart("ingot"),
                         new ItemPart("nugget"),
@@ -28,6 +28,7 @@ public class CommonProxy {
                         new ItemPart("plate"),
                         new ItemPart("gear")))
                 .build());
+        System.out.println(MaterialRegistry.INSTANCE.getItem("copper", "nugget").getRegistryName());
     }
 
     public void init(FMLInitializationEvent event) {

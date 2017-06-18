@@ -1,6 +1,8 @@
 package com.buuz135.materialized.api;
 
 import com.buuz135.materialized.Materialized;
+import com.buuz135.materialized.api.block.MaterializedBlock;
+import com.buuz135.materialized.api.item.MaterializedItem;
 import com.buuz135.materialized.api.material.BlockMaterial;
 import com.buuz135.materialized.api.material.CreatedMaterial;
 import com.buuz135.materialized.api.material.ItemMaterial;
@@ -13,21 +15,18 @@ import net.minecraftforge.fml.common.LoaderState;
 import net.minecraftforge.fml.common.ModContainer;
 import org.apache.logging.log4j.Level;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class MaterialRegistry {
 
     public static final MaterialRegistry INSTANCE = new MaterialRegistry();
+
     private HashMap<String, BlockMaterial> blockMaterials;
     private HashMap<String, ItemMaterial> itemMaterials;
-
-
-    private List<CreatedMaterial> materials;
+    private HashMap<String, CreatedMaterial> materials;
 
     public MaterialRegistry() {
-        materials = new ArrayList<>();
+        materials = new HashMap<>();
         itemMaterials = new HashMap<>();
         this.addItemMaterial(new ItemMaterial("ingot", new ResourceLocation(Reference.MODID, "items/metalingot"), 0));
         this.addItemMaterial(new ItemMaterial("nugget", new ResourceLocation(Reference.MODID, "items/metalnugget"), 0));
@@ -53,25 +52,19 @@ public class MaterialRegistry {
         CreatedMaterial createdMaterial = getMaterialOrCreate(materialInfo.getName(), (int) Long.parseLong(materialInfo.getColor(), 16));
         materialInfo.getBlockParts().forEach(blockPart -> createdMaterial.createBlock(getBlockMaterial(blockPart.getType()), blockPart));
         materialInfo.getItemParts().forEach(itemPart -> createdMaterial.createItem(getItemMaterial(itemPart.getType()), itemPart));
-        materials.add(createdMaterial);
+        if (!materials.containsKey(materialInfo.getName())) materials.put(materialInfo.getName(), createdMaterial);
         return createdMaterial;
     }
 
 
     public CreatedMaterial getMaterial(String name) {
-        for (CreatedMaterial material : materials) {
-            if (material.getName().equals(name)) return material;
-        }
+        if (materials.containsKey(name)) return materials.get(name);
         return null;
     }
 
     private CreatedMaterial getMaterialOrCreate(String name, int color) {
         CreatedMaterial material = getMaterial(name);
         return material == null ? new CreatedMaterial(name, color) : material;
-    }
-
-    public List<CreatedMaterial> getMaterials() {
-        return materials;
     }
 
     public void addBlockMaterial(BlockMaterial blockMaterial) {
@@ -98,5 +91,25 @@ public class MaterialRegistry {
             return itemMaterials.get(type);
         }
         return null;
+    }
+
+    public MaterializedItem getItem(String name, String type) {
+        CreatedMaterial material = getMaterial(name);
+        if (material == null) return null;
+        ItemMaterial materialType = getItemMaterial(type);
+        if (type == null) return null;
+        return material.getItem(materialType);
+    }
+
+    public MaterializedBlock getBlock(String name, String type) {
+        CreatedMaterial material = getMaterial(name);
+        if (material == null) return null;
+        BlockMaterial materialType = getBlockMaterial(type);
+        if (type == null) return null;
+        return material.getBlock(materialType);
+    }
+
+    public HashMap<String, CreatedMaterial> getMaterials() {
+        return materials;
     }
 }

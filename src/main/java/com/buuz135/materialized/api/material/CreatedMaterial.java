@@ -34,7 +34,7 @@ class CreatedMaterial {
     }
 
     private ColoredMaterializedBlock generateBlock(BlockMaterial material, BlockPart info) {
-        ColoredMaterializedBlock block = new ColoredMaterializedBlock(material, name, material.getMaterial(), color, info.getHarvestLevel());
+        ColoredMaterializedBlock block = new ColoredMaterializedBlock(material, name, material.getMaterial(), color, info.getHarvestLevel(), info.getHardness());
         block.setDropInfo(info.getDrop());
         block.register();
         if (info.getOredict() != null) {
@@ -66,5 +66,19 @@ class CreatedMaterial {
             item.registerRender();
         }
         return item;
+    }
+
+    public ColoredMaterializedBlock getBlock(BlockMaterial type) {
+        if (materializedBlockHashMap.containsKey(type)) {
+            return materializedBlockHashMap.get(type);
+        }
+        return null;
+    }
+
+    public ColoredMaterializedItem getItem(ItemMaterial type) {
+        if (materializedItemHashMap.containsKey(type)) {
+            return materializedItemHashMap.get(type);
+        }
+        return null;
     }
 }

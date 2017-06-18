@@ -8,8 +8,8 @@ public class ColoredMaterializedBlock extends MaterializedBlock implements IHasC
 
     private int color;
 
-    public ColoredMaterializedBlock(BlockMaterial blockMaterial, String name, Material mat, int color, int harvest) {
-        super(blockMaterial, name, mat, harvest);
+    public ColoredMaterializedBlock(BlockMaterial blockMaterial, String name, Material mat, int color, int harvest, float hardness) {
+        super(blockMaterial, name, mat, harvest, hardness);
         this.color = color;
     }
 

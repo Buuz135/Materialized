@@ -19,7 +19,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init(FMLInitializationEvent event) {
         super.init(event);
-        MaterialRegistry.INSTANCE.getMaterials().forEach(createdMaterial -> {
+        MaterialRegistry.INSTANCE.getMaterials().forEach((s, createdMaterial) -> {
                     createdMaterial.getMaterializedBlockHashMap().forEach((blockPart, block) -> registerColor(block, blockPart.getLayer()));
                     createdMaterial.getMaterializedItemHashMap().forEach((material, coloredMaterializedItem) -> registerColor(coloredMaterializedItem, material.getLayer()));
                 }
