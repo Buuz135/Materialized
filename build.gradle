@@ -86,14 +86,21 @@ processResources {
     }
 }
 
-configurations {
-    deployerJars
+task devJar(type: Jar, dependsOn: 'classes') {
+    from(sourceSets.main.output) {
+        include '**'
+    }
+    extension = 'jar'
+    classifier = 'dev'
 }
 
 artifacts {
-    archives deobfJar
+    archives devJar
 }
 
+configurations {
+    deployerJars
+}
 
 dependencies {
 	deployerJars "org.apache.maven.wagon:wagon-ftp:2.2"
