@@ -39,14 +39,19 @@ public class MaterialRegistry {
         this.addBlockMaterial(new BlockMaterial("denseore", Material.ROCK, "pickaxe", new ResourceLocation(Reference.MODID, "blocks/metaldenseore"), 0));
         this.addBlockMaterial(new BlockMaterial("lightore", Material.ROCK, "pickaxe", new ResourceLocation(Reference.MODID, "blocks/metallightore"), 0));
         this.addBlockMaterial(new BlockMaterial("block", Material.IRON, "pickaxe", new ResourceLocation(Reference.MODID, "blocks/metalblock"), 0));
-
     }
 
+    /**
+     * Creates a material or add more types to it if it was created before.
+     *
+     * @param materialInfo The info provided to make a material.
+     * @return The Material with the info provided or more if it was added before.
+     */
     public CreatedMaterial addMaterial(MaterialInfo materialInfo) {
         if (!Loader.instance().isInState(LoaderState.PREINITIALIZATION)) {
             ModContainer modContainer = Loader.instance().activeModContainer();
             String modContainerName = modContainer == null ? null : modContainer.getName();
-            Materialized.LOGGER.log(Level.ERROR, "Trying to get created material {} too soon. Call it after the PREINITIALIZATION. Mod: {}", materialInfo.getName(), modContainerName);
+            Materialized.LOGGER.log(Level.ERROR, "Trying to add the material {} too late. Call it in PREINITIALIZATION. Mod: {}", materialInfo.getName(), modContainerName);
             return null;
         }
         CreatedMaterial createdMaterial = getMaterialOrCreate(materialInfo.getName(), (int) Long.parseLong(materialInfo.getColor(), 16));
@@ -56,7 +61,11 @@ public class MaterialRegistry {
         return createdMaterial;
     }
 
-
+    /**
+     * Get the created material.
+     * @param name Name of the material.
+     * @return The Material, {@code null} if it doesn't exist.
+     */
     public CreatedMaterial getMaterial(String name) {
         if (materials.containsKey(name)) return materials.get(name);
         return null;
@@ -67,12 +76,25 @@ public class MaterialRegistry {
         return material == null ? new CreatedMaterial(name, color) : material;
     }
 
+    /**
+     * Adds a new block material to the registry if it's not present.
+     * @param blockMaterial BlockMaterial to add to the Registry.
+     */
     public void addBlockMaterial(BlockMaterial blockMaterial) {
         if (!blockMaterials.containsKey(blockMaterial.getName())) {
             blockMaterials.put(blockMaterial.getName(), blockMaterial);
+        } else {
+            ModContainer modContainer = Loader.instance().activeModContainer();
+            String modContainerName = modContainer == null ? null : modContainer.getName();
+            Materialized.LOGGER.log(Level.WARN, "Trying to add the block material {} that was already there. Mod: {}", blockMaterial.getName(), modContainerName);
         }
     }
 
+    /**
+     * Gets the BlockMaterial if it is present in the registry
+     * @param name The name of the BlockMaterial
+     * @return The specified BlockMaterial, {@code null} if it doesn't exist
+     */
     public BlockMaterial getBlockMaterial(String name) {
         if (blockMaterials.containsKey(name)) {
             return blockMaterials.get(name);
@@ -80,19 +102,39 @@ public class MaterialRegistry {
         return null;
     }
 
+    /**
+     * Adds a new item material to the registry if it's not present.
+     * @param itemMaterial ItemMaterial to add to the Registry.
+     */
     private void addItemMaterial(ItemMaterial itemMaterial) {
         if (!itemMaterials.containsKey(itemMaterial.getName())) {
             itemMaterials.put(itemMaterial.getName(), itemMaterial);
+        } else {
+            ModContainer modContainer = Loader.instance().activeModContainer();
+            String modContainerName = modContainer == null ? null : modContainer.getName();
+            Materialized.LOGGER.log(Level.WARN, "Trying to add the item material {} that was already there. Mod: {}", itemMaterial.getName(), modContainerName);
         }
     }
 
-    private ItemMaterial getItemMaterial(String type) {
-        if (itemMaterials.containsKey(type)) {
-            return itemMaterials.get(type);
+    /**
+     * Gets the ItemMaterial if it is present in the registry.
+     *
+     * @param name The name of the ItemMaterial.
+     * @return The specified ItemMaterial, {@code null} if it doesn't exist.
+     */
+    private ItemMaterial getItemMaterial(String name) {
+        if (itemMaterials.containsKey(name)) {
+            return itemMaterials.get(name);
         }
         return null;
     }
 
+    /**
+     * Gets the Item from the specified material and type.
+     * @param name The name of the material.
+     * @param type The type of the item.
+     * @return The specified item, {@code null} if the material or the type doesn't exist.
+     */
     public MaterializedItem getItem(String name, String type) {
         CreatedMaterial material = getMaterial(name);
         if (material == null) return null;
@@ -101,6 +143,12 @@ public class MaterialRegistry {
         return material.getItem(materialType);
     }
 
+    /**
+     * Gets the Block from the specified material and type.
+     * @param name The name of the material.
+     * @param type The type of the block.
+     * @return The specified block, {@code null} if the material or the type doesn't exist.
+     */
     public MaterializedBlock getBlock(String name, String type) {
         CreatedMaterial material = getMaterial(name);
         if (material == null) return null;
