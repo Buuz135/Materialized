@@ -91,7 +91,7 @@ configurations {
 }
 
 dependencies {
-	deployerJars "org.apache.maven.wagon:wagon-ssh:2.2"
+	deployerJars "org.apache.maven.wagon:wagon-http:2.2"
 }
 
 uploadArchives{
@@ -99,8 +99,8 @@ uploadArchives{
         mavenDeployer{
             configuration = configurations.deployerJars
             //repository(url: System.properties['URL']) {
-            repository(url: "file:///srv/http/maven2") {
-                //authentication(userName: "${username}", password: "${password}")
+            repository(url: "http://dyonovan.com/maven2") {
+                authentication(userName: "${username}", password: "${password}")
             }
             pom{
                 groupId = project.group
