@@ -99,7 +99,7 @@ uploadArchives{
         mavenDeployer{
             configuration = configurations.deployerJars
             //repository(url: System.properties['URL']) {
-            repository(url: "sftp://dyonovan.com/srv/http/maven2") {
+            repository(url: "file://dyonovan.com/srv/http/maven2") {
                 authentication(userName: "${username}", password: "${password}")
             }
             pom{
