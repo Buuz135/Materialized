@@ -4,6 +4,11 @@ import com.buuz135.materialized.api.IHasColor;
 import com.buuz135.materialized.api.material.BlockMaterial;
 import net.minecraft.block.material.Material;
 
+/**
+ * Represents a block that has tint color.
+ *
+ * @author Buuz135
+ */
 public class ColoredMaterializedBlock extends MaterializedBlock implements IHasColor {
 
     private int color;

@@ -24,6 +24,11 @@ import org.apache.commons.lang3.text.WordUtils;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
+/**
+ * Represents a simple block
+ *
+ * @author Buuz135
+ */
 public class MaterializedBlock extends Block {
 
     private BlockMaterial blockMaterial;

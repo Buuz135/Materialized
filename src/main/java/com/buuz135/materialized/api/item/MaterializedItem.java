@@ -10,6 +10,11 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.commons.lang3.text.WordUtils;
 
+/**
+ * Represents a simple block
+ *
+ * @author Buuz135
+ */
 public class MaterializedItem extends Item {
 
     private ItemMaterial itemMaterial;

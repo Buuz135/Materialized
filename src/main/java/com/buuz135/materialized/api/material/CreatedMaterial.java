@@ -12,6 +12,11 @@ import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.HashMap;
 
+/**
+ * Collects all the blocks and items from a material type
+ *
+ * @author Buuz135
+ */
 public @Data
 class CreatedMaterial {
 
