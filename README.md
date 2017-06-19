@@ -84,3 +84,42 @@ That file will have this style:
   }
 ]
 ```
+## Developer
+Add the dependecies to your gradle project
+```
+repositories {
+    maven{
+        name = "Materialized"
+        url = "http://dyonovan.com/maven2/"
+    }
+}
+dependencies {
+    compile "com.buuz135.materialized:materialized:1.12-0.1+:deobf"
+}
+```
+### Adding types
+You can add more BlockMaterial or ItemMaterial types by doing 
+```MaterialRegistry.INSTANCE.addItemMaterial(new ItemMaterial("ingot", new ResourceLocation(Reference.MODID, "items/metalingot"), 0));```
+or 
+```MaterialRegistry.INSTANCE.addBlockMaterial(new BlockMaterial("ore", Material.ROCK, "pickaxe", new ResourceLocation(Reference.MODID, "blocks/metalore"), 0));```
+in your PreInit.
+
+### Creating materials
+You can add material by using this method. This will all the block types and items types added by default:
+```
+MaterialRegistry.INSTANCE.addMaterial(MaterialInfo.builder().name("copper").color("a35309")
+                   .blockParts(Arrays.asList(
+                           new BlockPart("ore", 3, 3, new BlockPart.DropInfo(null, 0, 1, 0, 0)),
+                           new BlockPart("denseore", 3, 3, new BlockPart.DropInfo(null, 0, 1, 0, 0)),
+                           new BlockPart("lightore", 3, 3, new BlockPart.DropInfo("this:nugget", 0, 2, 2, 1)),
+                           new BlockPart("block", 3, 3, new BlockPart.DropInfo(null, 0, 1, 0, 0))))
+                   .itemParts(Arrays.asList(
+                           new ItemPart("ingot"),
+                           new ItemPart("nugget"),
+                           new ItemPart("dust"),
+                           new ItemPart("tinydust"),
+                           new ItemPart("plate"),
+                           new ItemPart("gear")))
+                   .build());
+```
+Once you have registered the material you can access to it by doing ```MaterialRegistry.INSTANCE.getItem("copper", "nugget")```.
