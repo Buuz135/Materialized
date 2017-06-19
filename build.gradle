@@ -91,7 +91,7 @@ task devJar(type: Jar, dependsOn: 'classes') {
         include '**'
     }
     extension = 'jar'
-    classifier = 'dev'
+    classifier = 'deobf'
 }
 
 artifacts {
