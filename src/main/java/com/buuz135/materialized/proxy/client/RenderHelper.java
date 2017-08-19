@@ -16,7 +16,6 @@ import java.util.Map;
 public class RenderHelper {
 
     public static void registerBlockModel(Block block, BlockMaterial type) {
-        System.out.println(type.getName());
         ModelLoader.setCustomStateMapper(block, blockIn -> {
             Map<IBlockState, ModelResourceLocation> map = Maps.newHashMap();
             map.put(blockIn.getDefaultState(), new ModelResourceLocation(type.getResourceLocation(), "normal"));

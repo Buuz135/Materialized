@@ -1,10 +1,7 @@
 package com.buuz135.materialized;
 
-import com.buuz135.materialized.api.MaterialRegistry;
-import com.buuz135.materialized.api.material.info.MaterialInfo;
 import com.buuz135.materialized.proxy.CommonProxy;
 import com.buuz135.materialized.utils.Reference;
-import com.google.gson.Gson;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -16,8 +13,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
 
@@ -38,18 +33,7 @@ public class Materialized {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) throws IOException {
-        File direc = new File(event.getModConfigurationDirectory().getAbsolutePath() + File.separator + Reference.MODID);
-        if (!direc.exists()) direc.mkdir();
-        File json = new File(direc.getAbsolutePath() + File.separator + "materials.json");
-        if (json.exists()) {
-            FileReader reader = new FileReader(json);
-            MaterialInfo[] materialInfos = new Gson().fromJson(reader, MaterialInfo[].class);
-            reader.close();
-            for (MaterialInfo materialInfo : materialInfos) {
-                MaterialRegistry.INSTANCE.addMaterial(materialInfo);
-            }
-        }
-        //proxy.preInit(event);
+        proxy.preInit(event);
     }
 
     @Mod.EventHandler

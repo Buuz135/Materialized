@@ -5,9 +5,6 @@ import com.buuz135.materialized.api.item.ColoredMaterializedItem;
 import com.buuz135.materialized.api.material.info.BlockPart;
 import com.buuz135.materialized.api.material.info.ItemPart;
 import lombok.Data;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.HashMap;
@@ -41,14 +38,14 @@ class CreatedMaterial {
     private ColoredMaterializedBlock generateBlock(BlockMaterial material, BlockPart info) {
         ColoredMaterializedBlock block = new ColoredMaterializedBlock(material, name, material.getMaterial(), color, info.getHarvestLevel(), info.getHardness());
         block.setDropInfo(info.getDrop());
-        block.register();
         if (info.getOredict() != null) {
+            String[] ores = new String[info.getOredict().length];
+            int i = 0;
             for (String s : info.getOredict()) {
-                OreDictionary.registerOre(s.replaceAll(":this", WordUtils.capitalize(name)), block);
+                ores[i] = s.replaceAll(":this", WordUtils.capitalize(name));
+                ++i;
             }
-        }
-        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
-            block.registerRender();
+            block.setOreDict(ores);
         }
         return block;
     }
@@ -59,16 +56,16 @@ class CreatedMaterial {
         }
     }
 
-    private ColoredMaterializedItem generateItem(ItemMaterial material, ItemPart itemPart) {
+    private ColoredMaterializedItem generateItem(ItemMaterial material, ItemPart info) {
         ColoredMaterializedItem item = new ColoredMaterializedItem(material, name, color);
-        item.register();
-        if (itemPart.getOredict() != null) {
-            for (String s : itemPart.getOredict()) {
-                OreDictionary.registerOre(s.replaceAll(":this", WordUtils.capitalize(name)), item);
+        if (info.getOredict() != null) {
+            String[] ores = new String[info.getOredict().length];
+            int i = 0;
+            for (String s : info.getOredict()) {
+                ores[i] = s.replaceAll(":this", WordUtils.capitalize(name));
+                ++i;
             }
-        }
-        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
-            item.registerRender();
+            item.setOreDict(ores);
         }
         return item;
     }

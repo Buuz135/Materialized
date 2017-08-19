@@ -5,6 +5,7 @@ import com.buuz135.materialized.api.material.BlockMaterial;
 import com.buuz135.materialized.api.material.info.BlockPart;
 import com.buuz135.materialized.proxy.client.RenderHelper;
 import com.buuz135.materialized.utils.Reference;
+import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -16,9 +17,9 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.commons.lang3.text.WordUtils;
 
 import javax.annotation.Nonnull;
@@ -35,6 +36,9 @@ public class MaterializedBlock extends Block {
     private String name;
     @Setter
     private BlockPart.DropInfo dropInfo;
+    @Setter
+    @Getter
+    private String[] oreDict;
 
     public MaterializedBlock(BlockMaterial blockMaterial, String name, Material mat, int harvest, float hardness) {
         super(mat);
@@ -47,14 +51,17 @@ public class MaterializedBlock extends Block {
         this.setUnlocalizedName(getLocalizedName());
     }
 
-    public void register() {
-        GameRegistry.register(this);
-        GameRegistry.register(new ItemBlock(this) {
+    public void registerBlock(IForgeRegistry<Block> blocks) {
+        blocks.register(this);
+    }
+
+    public void registerItem(IForgeRegistry<Item> items) {
+        items.register(new ItemBlock(this) {
             @Override
             public String getItemStackDisplayName(ItemStack stack) {
                 return (I18n.canTranslate("material." + name + ".name") ? I18n.translateToLocal("material." + name + ".name") : WordUtils.capitalize(name)) + " " + I18n.translateToLocal("type." + blockMaterial.getName() + ".name");
             }
-        }, getRegistryName());
+        }.setRegistryName(this.getRegistryName()));
     }
 
     public void registerRender() {

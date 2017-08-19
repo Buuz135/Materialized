@@ -63,6 +63,7 @@ public class MaterialRegistry {
 
     /**
      * Get the created material.
+     *
      * @param name Name of the material.
      * @return The Material, {@code null} if it doesn't exist.
      */
@@ -78,6 +79,7 @@ public class MaterialRegistry {
 
     /**
      * Adds a new block material to the registry if it's not present.
+     *
      * @param blockMaterial BlockMaterial to add to the Registry.
      */
     public void addBlockMaterial(BlockMaterial blockMaterial) {
@@ -92,6 +94,7 @@ public class MaterialRegistry {
 
     /**
      * Gets the BlockMaterial if it is present in the registry
+     *
      * @param name The name of the BlockMaterial
      * @return The specified BlockMaterial, {@code null} if it doesn't exist
      */
@@ -104,6 +107,7 @@ public class MaterialRegistry {
 
     /**
      * Adds a new item material to the registry if it's not present.
+     *
      * @param itemMaterial ItemMaterial to add to the Registry.
      */
     private void addItemMaterial(ItemMaterial itemMaterial) {
@@ -131,6 +135,7 @@ public class MaterialRegistry {
 
     /**
      * Gets the Item from the specified material and type.
+     *
      * @param name The name of the material.
      * @param type The type of the item.
      * @return The specified item, {@code null} if the material or the type doesn't exist.
@@ -145,6 +150,7 @@ public class MaterialRegistry {
 
     /**
      * Gets the Block from the specified material and type.
+     *
      * @param name The name of the material.
      * @param type The type of the block.
      * @return The specified block, {@code null} if the material or the type doesn't exist.
