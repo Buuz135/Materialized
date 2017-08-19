@@ -112,7 +112,7 @@ uploadArchives {
             configuration = configurations.deployerJars
             //repository(url: System.properties['URL']) {
             repository(url: "ftp://dyonovan.com/srv/http/maven2") {
-                //authentication(userName: "${username}", password: "${password}")
+                authentication(userName: "${username}", password: "${password}")
             }
             pom {
                 groupId = project.group
